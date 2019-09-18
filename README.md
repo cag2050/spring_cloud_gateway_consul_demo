@@ -17,6 +17,7 @@ spring.cloud.consul.discovery.register=false
 
 ### 步骤三：创建 Consul 容器
 1.镜像官方网址：https://hub.docker.com/_/consul
+
 2.pull 镜像：
 ```
 docker pull consul:1.6.0
@@ -37,6 +38,6 @@ http://localhost:8500/
 1. 访问：http://localhost:8506/service-producer/hello ，正常返回，说明服务网关转发成功。
 
 ### 参考
-参考资料 | 网址
---- | ---
-springcloud(十六)：服务网关 Spring Cloud GateWay 服务化和过滤器（章节：服务网关注册到注册中心） | http://www.ityouknow.com/springcloud/2019/01/19/spring-cloud-gateway-service.html
+参考资料 | 备注 | 网址
+--- | --- | ---
+springcloud(十六)：服务网关 Spring Cloud GateWay 服务化和过滤器（章节：服务网关注册到注册中心）| 此参考资料，项目里使用的注册中心是 Eureka。 | http://www.ityouknow.com/springcloud/2019/01/19/spring-cloud-gateway-service.html
