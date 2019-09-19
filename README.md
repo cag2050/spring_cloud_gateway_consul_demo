@@ -34,10 +34,21 @@ http://localhost:8500/
 ### 步骤四：启动服务端
 1. 运行项目：https://github.com/cag2050/spring_cloud_consul_producer1_demo
 
-### 步骤五：验证
-1. 访问：http://localhost:8506/service-producer/hello ，正常返回，说明服务网关转发成功。
+### 步骤五：验证服务网关转发成功
+1. 项目 spring_cloud_consul_producer1_demo 的 /hello 服务是：http://localhost:8501/hello ，访问：http://localhost:8506/service-producer/hello ，正常返回，说明服务网关转发成功。
+
+### 步骤六：Filter 的使用：使用 AddRequestParameter GatewayFilter 在请求中添加指定参数
+1. 修改 src/main/resources/application.yml，添加 routes 部分
+2. 访问地址 http://localhost:8501/foo 页面返回类似：`参数 foo 的值是：null`，说明并没有接受到参数 foo；通过网关来调用此服务，浏览器访问地址 http://localhost:8506/foo
+页面返回类似：`参数 foo 的值是：bar`，说明成功接收到参数 foo 的值 bar ,证明网关在转发的过程中已经通过 filter 添加了设置的参数和值。
+
+### 步骤七：服务化路由转发
+1. 修改 src/main/resources/application.yml，将`uri: http://localhost:8501` 修改成 `uri: lb://service-producer`，浏览器访问地址 http
+://localhost:8506/foo，页面交替出现：`参数 foo 的值是：bar，from port：8501` 和 `参数 foo 的值是：bar，from port：8502`，证明请求依据均匀转发到后端服务，并且后端服务均接收到了 filter 增加的参数 foo 值。
 
 ### 参考
 参考资料 | 备注 | 网址
 --- | --- | ---
-springcloud(十六)：服务网关 Spring Cloud GateWay 服务化和过滤器（章节：服务网关注册到注册中心）| 此参考资料，项目里使用的注册中心是 Eureka。 | http://www.ityouknow.com/springcloud/2019/01/19/spring-cloud-gateway-service.html
+springcloud(十六)：服务网关 Spring Cloud GateWay 服务化和过滤器 | 此参考资料，项目里使用的注册中心是 Eureka。 | http://www.ityouknow.com/springcloud/2019/01/19/spring-cloud-gateway-service.html
+
+> 代码仓库：https://github.com/cag2050/spring_cloud_gateway_consul_demo

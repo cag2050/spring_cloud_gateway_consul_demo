@@ -1,0 +1,33 @@
+server:
+  port: 8506
+
+spring:
+  application:
+    name: spring-cloud-gateway-consul
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+#        设置不需要注册到 consul 中
+        register: false
+    gateway:
+      discovery:
+        locator:
+#          是否与服务注册于发现组件进行结合，通过 serviceId 转发到具体的服务实例。
+#          默认为 false，设为 true 便开启通过服务中心的自动根据 serviceId 创建路由的功能。
+          enabled: true
+      routes:
+        - id: add_request_parameter_route
+#          只使用一个服务
+          uri: http://localhost:8501
+#          服务化路由转发：使用注册中心的多个服务
+#          格式为：lb://应用注册服务名
+#          uri: lb://service-producer
+          filters:
+#            设置所有的 GET 方法都会自动添加foo=bar
+            - AddRequestParameter=foo, bar
+          predicates:
+            - Method=GET
+
+
