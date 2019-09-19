@@ -35,7 +35,8 @@ http://localhost:8500/
 1. 运行项目：https://github.com/cag2050/spring_cloud_consul_producer1_demo
 
 ### 步骤五：验证服务网关转发成功
-1. 项目 spring_cloud_consul_producer1_demo 的 /hello 服务是：http://localhost:8501/hello ，访问：http://localhost:8506/service-producer/hello ，正常返回，说明服务网关转发成功。
+1. 项目 spring_cloud_consul_producer1_demo 的 /hello 服务是：http://localhost:8501/hello ，访问：http://localhost:8506/service
+-producer/hello ，正常返回类似文字：hello，说明服务网关转发成功。
 
 ### 步骤六：Filter 的使用：使用 AddRequestParameter GatewayFilter 在请求中添加指定参数
 1. 修改 src/main/resources/application.yml，添加 routes 部分
@@ -43,7 +44,8 @@ http://localhost:8500/
 页面返回类似：`参数 foo 的值是：bar`，说明成功接收到参数 foo 的值 bar ,证明网关在转发的过程中已经通过 filter 添加了设置的参数和值。
 
 ### 步骤七：服务化路由转发
-1. 修改 src/main/resources/application.yml，将`uri: http://localhost:8501` 修改成 `uri: lb://service-producer`，浏览器访问地址 http
+1. 再启动服务端：https://github.com/cag2050/spring_cloud_consul_producer2_demo
+2. 修改 src/main/resources/application.yml，将`uri: http://localhost:8501` 修改成 `uri: lb://service-producer`，浏览器访问地址 http
 ://localhost:8506/foo，页面交替出现：`参数 foo 的值是：bar，from port：8501` 和 `参数 foo 的值是：bar，from port：8502`，证明请求依据均匀转发到后端服务，并且后端服务均接收到了 filter 增加的参数 foo 值。
 
 ### 参考

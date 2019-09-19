@@ -20,10 +20,10 @@ spring:
       routes:
         - id: add_request_parameter_route
 #          只使用一个服务
-          uri: http://localhost:8501
+#          uri: http://localhost:8501
 #          服务化路由转发：使用注册中心的多个服务
 #          格式为：lb://应用注册服务名
-#          uri: lb://service-producer
+          uri: lb://service-producer
           filters:
 #            设置所有的 GET 方法都会自动添加foo=bar
             - AddRequestParameter=foo, bar
