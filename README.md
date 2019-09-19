@@ -4,7 +4,7 @@ Spring Cloud Gateway 提供了一种默认转发的能力，只要将 Spring Clo
 ### 步骤一：创建项目
 1. 选择 Gateway 和 Consul
 
-### 步骤二：配置 src/main/resources/application.properties 文件
+### 步骤二：配置 src/main/resources/application.yml 文件
 1. `spring.cloud.gateway.discovery.locator.enabled`
 ：是否与服务注册和发现组件进行结合，通过 serviceId 转发到具体的服务实例。默认为 false，设为 true 便开启通过服务中心的自动根据 serviceId 创建路由的功能。
 2. 指定注册中心的地址，以便使用服务发现功能
